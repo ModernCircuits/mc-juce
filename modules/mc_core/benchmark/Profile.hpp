@@ -1,15 +1,15 @@
 #ifndef MODERN_CIRCUITS_JUCE_MODULES_PROFILE_HPP
 #define MODERN_CIRCUITS_JUCE_MODULES_PROFILE_HPP
 
-#include "mc/algorithm.hpp"
-#include "mc/chrono.hpp"
-#include "mc/fstream.hpp"
-#include "mc/iomanip.hpp"
-#include "mc/memory.hpp"
-#include "mc/mutex.hpp"
-#include "mc/sstream.hpp"
-#include "mc/string.hpp"
-#include "mc/thread.hpp"
+#include "mc/core/algorithm.hpp"
+#include "mc/core/chrono.hpp"
+#include "mc/core/fstream.hpp"
+#include "mc/core/iomanip.hpp"
+#include "mc/core/memory.hpp"
+#include "mc/core/mutex.hpp"
+#include "mc/core/sstream.hpp"
+#include "mc/core/string.hpp"
+#include "mc/core/thread.hpp"
 
 namespace mc {
 
@@ -62,7 +62,7 @@ struct Profiler {
             R"(,{{"cat":"function","dur": {0},"name": "{1}","ph":"X","pid":0,"tid": "{2}","ts": {3}}})", //
             result.ElapsedTime.count(),                                                                  //
             name,                                                                                        //
-            result.ThreadID,                                                                             //
+            fmt::streamed(result.ThreadID),                                                              //
             result.Start.count()                                                                         //
         );
 
@@ -122,10 +122,10 @@ struct ProfileTimer {
         if (!stopped_) { stop(); }
     }
 
-    ProfileTimer(const ProfileTimer& other) = delete;
-    ProfileTimer(ProfileTimer&& other)      = delete;
+    ProfileTimer(const ProfileTimer& other)                  = delete;
+    ProfileTimer(ProfileTimer&& other)                       = delete;
     auto operator=(const ProfileTimer& rhs) -> ProfileTimer& = delete;
-    auto operator=(ProfileTimer&& rhs) -> ProfileTimer& = delete;
+    auto operator=(ProfileTimer&& rhs) -> ProfileTimer&      = delete;
 
     void stop()
     {

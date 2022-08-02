@@ -18,9 +18,9 @@
     #define USE_MC_METERS 1
 #endif
 
-#include "mc/atomic.hpp"
-#include "mc/numeric.hpp"
-#include "mc/vector.hpp"
+#include "mc/core/atomic.hpp"
+#include "mc/core/numeric.hpp"
+#include "mc/core/vector.hpp"
 
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_events/juce_events.h>
